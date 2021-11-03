@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Codility.Lesson1_Iterations
 {
@@ -10,22 +8,25 @@ namespace Codility.Lesson1_Iterations
     {
         public static int Solution(int N)
         {
-            int _count = 0;
-            List<int> _list = new List<int>();
+            string binary = Convert.ToString(N, 2);
 
-            string _binary = Convert.ToString(N, 2);
-            for (int i = 0; i < _binary.Length; i++)
+            int _max = 0;
+            int _count = 0;
+
+            for (int i = 0; i < binary.Length; i++)
             {
-                if (_binary[i] == '0')
-                    _count++;
+                if (binary[i] == '0')
+                    _max++;
                 else
                 {
-                    _list.Add(_count);
-                    _count = 0;
+                    if (_count < _max)
+                        _count = _max;
+
+                    _max = 0;
                 }
             }
-            _list.Sort();
-            return _list[_list.Count - 1];
+
+            return _count;
         }
     }
 }
